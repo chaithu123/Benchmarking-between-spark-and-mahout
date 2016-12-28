@@ -1,0 +1,8 @@
+hadoop fs -mkdir /user/cloudera/data/news
+mahout seqdirectory -i data/news/ -o data/news/kmeansseqfiles -ow
+mahout seq2sparse -i data/news/kmeansseqfiles -o data/news/kmeanstfidiffiles -ow
+hadoop fs -ls data/news/kmeanstfidffiles
+mahout kmeans -i data/news/kmeanstfidffiles/tfidf-vectors/ -c data/news/kmeanscentroids -cl -o data/news/kmeansclusters -k 2 -ow -x 50 -dmorg.apache.mahout.common.distance.CosineDistanceMeasure
+hadoop fs -ls data/news/kmeansclusters
+mahout clusterdump -d data/news/kmeanstfidffiles/dictionary.file-0 -dt sequencefile -i data/news/kmeansclusters/clusters-1-final -n 20 -b 100 -o data/news/dumpfile.txt -p data/news/kmeansclusters/clusteredPoints/
+cat data/news/dumpfile.txt
