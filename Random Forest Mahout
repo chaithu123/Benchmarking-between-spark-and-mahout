@@ -1,0 +1,9 @@
+mahout describe -p data/bankruptsy/bankruptsy.csv -f data/bankruptsy/rfinfo -d I 12 N L
+hadoop fs -rm -r temp/markedPreferences
+hadoop fs -rm -r data/bankruptsy/rfsplit
+mahout splitDataset --input data/bankruptsy/bankruptsy.csv --output data/bankruptsy/rfsplit --trainingPercentage 0.7 --probePercentage 0.3
+hadoop fs -ls data/bankruptcy/rfsplit
+hadoop fs -rm -r data/bankruptcy/rfmodel
+mahout buildforest -d data/bankruptcy/rfsplit/trainingSet/* -ds data/bankruptcy/rfinfo -sl 3 -p -t 10 -o data/bankruptcy/rfmodel
+hadoop fs -rm -r data/bankruptcy/rfpredictions
+mahout testforest -i data/bankruptcy/rfsplit/probeSet -ds data/bankruptcy/rfinfo -m data/bankruptcy/rfmodel -a -mr -o data/bankruptcy/rfpredictions
