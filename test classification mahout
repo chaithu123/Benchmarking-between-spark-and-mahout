@@ -1,0 +1,6 @@
+mahout seqdirectory -i 20news-all -o /20news-seq -ow
+hadoop fs -text 20news-seq/chunck-0 | more
+mahout seq2sparse -i /20news-seq -o /20newsvectors -lnorm -nv -wt tfidf
+mahout split -i /20news-vectors/tfidf-vectors --trainingOutput /20news-train-vectors --testOutput /20news-test-vectors --randomSelectionPct 40 --overwrite --sequenceFiles -xm sequential
+mahout trainnb -i /20news-train-vectors -el -o /20news-model -li /20news-labelindex -ow
+mahout testnb -i /20news-test-vectors -m /model -l /labelindex -ow -o /20news-testing
