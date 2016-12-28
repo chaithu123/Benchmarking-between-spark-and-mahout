@@ -36,7 +36,8 @@ Collaborative filtering methods including Alternating Least squares (ALS)
 Clustering investigation techniques including k-means, and Latent Dirichlet Allocation (LDA) 
 
 
-#Comparison Results
+####Comparison Results
+
 The primary contrast will be originated from hidden systems. In the event of Mahout it is Hadoop MapReduce and if there should arise an occurrence of MLib it is Spark. To be more particular - from the distinction in per work overhead.
 As far as my understanding Spark takes less time in computing the iterative computations when compared to mahout because of its in-memory computing.
 To explain well let us take an example where an algorithm needs to complete 1000 cycles to be completed for accomplishing a task,
@@ -47,4 +48,7 @@ Spark total time taken would be=1*20sec +999* 1 second=1019 seconds.
 This huge difference is because the mahout map-reduce frame requires to fetch data from Hadoop distributed file system each and every iteration, but when it comes to spark it first takes the data from hdfs and create an rdd in memory and if any iterative operations occur instead of fetching data from hdfs it checks whether the data required is there in memory and performs operations.
 This is the reason for spark lightening speeds when compared to mahout mahout-map-reduce. 
 
-
+![Diagramatic representation of this program](https://github.com/chaithu123/Benchmarking-between-spark-and-mahout/blob/master/x.jpg)
+![Diagramatic representation of this program](https://github.com/chaithu123/Benchmarking-between-spark-and-mahout/blob/master/y.jpg)
+![Diagramatic representation of this program](https://github.com/chaithu123/Benchmarking-between-spark-and-mahout/blob/master/z.jpg)
+![Diagramatic representation of this program](https://github.com/chaithu123/Benchmarking-between-spark-and-mahout/blob/master/zz.jpg)
